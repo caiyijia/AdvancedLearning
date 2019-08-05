@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>class与style绑定</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <style>
+        p {
+            width: 100px;
+            line-height: 100px;
+            text-align: center;
+            color: #fff;
+            background-color: red;
+        }
+
+        p.active {
+            background-color: pink;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <p :class="{active: activeBool}" @click="changeColor">Yijia</p>
+    </div>
+
+    <script>
+        const vm = new Vue({
+            el: '#app',
+            data: {
+                activeBool: false,
+                // active: ''
+            },
+            methods: {
+                changeColor() {
+                    this.activeBool = !this.activeBool
+                    // this.active = this.active == 'active' ? '' : 'active'
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>
