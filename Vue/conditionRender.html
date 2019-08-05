@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>条件渲染</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <style>
+        p {
+            width: 100px;
+            line-height: 100px;
+            text-align: center;
+            color: #fff;
+            background-color: red;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <button @click='showOrHide'>y/n</button>
+        <!-- <p v-if="show === 1">CYJ</p> -->
+        <!-- v-if 和  v-else/else-if 中间不能有第三者 -->
+        <!-- <span v-else-if="show === 2"></span>
+        <span v-else>concealed</span> -->
+        <div v-if="show">
+            <span>Your ID</span><input type="text" key="ID">
+        </div>
+        <div v-else>
+            <span>Password</span><input type="password" key="username">
+        </div>
+    </div>
+
+    <script>
+        const vm = new Vue({
+            el: '#app',
+            data: {
+                show: true
+            },
+            methods: {
+                showOrHide(){
+                    this.show = !this.show;
+                }
+            }
+        })
+    </script>
+</body>
+</html>
