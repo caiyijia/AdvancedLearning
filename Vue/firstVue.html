@@ -9,30 +9,59 @@
 </head>
 <body>
     <div id="app">
-        {{ name }}
-        <a :href="url">Vue</a>
+        {{ describe }}
+        <!-- <a :href="url">Vue</a>
         <button @click='changeNeme'>点击</button>
-        <p v-html='tag'></p>
+        <p v-html='tag'></p> -->
     </div>
 
     
 
     <script>
-        new Vue({
+        const vm = new Vue({
             el: '#app',
             data: {
                 name:'cyj',
-                url: 'https://baidu.com',
-                tag: '<span>我是一个span标签</span>'
+                // url: 'https://baidu.com',
+                // tag: '<span>我是一个span标签</span>',
+                looks: 'is nothing',
+                // describe: 'cool'
+                age: 22
             },
-            methods: {
-                changeNeme() {
+            // methods: {
+            //     changeNeme() {
 
-                    // mini: this.data.xxx
-                    // this.xxx
-                    this.name = this.name + '1';
-                    console.log('1')
-                }
+            //         // mini: this.data.xxx
+            //         // this.xxx
+            //         this.name = this.name + '1';
+            //         console.log('1')
+            //     }
+            // }
+            // watch: {
+            //     name() {
+            //         this.describe = this.name + ' ' + this.looks
+            //     },
+            //     looks() {
+            //         this.describe = this.name + ' ' + this.looks
+            //     }
+            // },
+            computed: {
+                // describe() {
+                //     console.log('---computed---')
+                //     return this.name + ' ' + this.looks;
+                // } 
+                describe: {
+                    get() {
+                        return this.name + ' ' + this.looks
+                    },
+                    set(val) {
+                        console.log(val)
+                        let arr = val.split(' ');
+                        this.name = arr[0];
+                        // arr.shift()
+                        
+                    }
+                }  
             }
         })
     
