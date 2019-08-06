@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>动态组件,插槽</title>
+</head>
+
+<body>
+    <div id="app">
+        <button @click="changeCmp">切换</button>
+        <cmp-one>
+            <span slot="before"></span>
+        </cmp-one>
+        <cmp-two :list="list">
+            <template slot-scope="list">
+                <li>{{list.item}} - {{list.index}}</li>
+            </template>
+        </cmp-two>
+        <cmp-two :list="list">
+                <template slot-scope="list">
+                    <li>{{list.index}} - {{list.item}}</li>
+                </template>
+            </cmp-two>
+        <!-- <keep-alive>
+            <component :is="type"></component>
+        </keep-alive> -->
+    </div>
+
+    <!-- <div>组件2 <input type="value"></div> -->
+
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script>
+        const cmpOne = {
+            template: `<div> <slot name="before"></slot>
+        组件1 <input type="value"> <slot name="after"></slot>
+        </div>`
+
+        }
+        const cmpTwo = {
+            props: ['list'],
+            template: `<div>
+                            组件2 <input type="value">
+                            <ul>
+                                <slot v-for="(item, index) in list" 
+                                    :key="item"
+                                    :item="item"
+                                    :index="index">
+                                </slot>
+                            </ul>
+
+                        </div>`
+        }
+
+        const vm = new Vue({
+            el: `#app`,
+            components: {
+                cmpOne,
+                cmpTwo,
+            },
+            data: {
+                showOne: true,
+                type: 'cmp-one',
+                list: [1, 2, 3, 4, 5]
+            },
+            methods: {
+                changeCmp() {
+                    // this.showOne = !this.showOne;
+                    // this.type = this.type == 'cmp-one' ? 'cmp-two' : 'cmp-one'
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>
