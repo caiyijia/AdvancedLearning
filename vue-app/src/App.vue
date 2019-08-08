@@ -1,49 +1,87 @@
 <template>
   <div id="app">
-    <div id="nav">
+
+    <div class="header">
+      <div class="center">
+        <div class="logo">
+          <img
+            src="./assets/logo.png"
+            alt=""
+          >
+        </div>
+        <ul class="nav">
+          <router-link
+            tag="li"
+            to="/"
+          >Home</router-link> |
+          <router-link
+            tag="li"
+            to="/learn"
+          >课程学习</router-link> |
+          <router-link
+            tag="li"
+            to="/student"
+          >学员展示</router-link> |
+          <router-link
+            tag="li"
+            to="/community"
+          >社区</router-link> |
+          <router-link
+            tag="li"
+            to="/about"
+          >About</router-link>
+        </ul>
+      </div>
+    </div>
+    <!-- <div id="nav">
       <router-link to="/">Home</router-link> |
       <router-link to="/learn">课程学习</router-link> |
       <router-link to="/student">学员展示</router-link> |
       <router-link to="/community">社区</router-link> |
       <router-link to="/about">About</router-link>
-    </div>
-    <div class="header">
-      <div class="center">
-        <div class="logo">
-          <img src="./assets/logo.png" alt="">
-        </div>
-        <div class="nav">
-          <router-link tag="li" to="/">Home</router-link> |
-          <router-link tag="li" to="/learn">课程学习</router-link> |
-          <router-link tag="li" to="/student">学员展示</router-link> |
-          <router-link tag="li" to="/community">社区</router-link> |
-          <router-link tag="li" to="/about">About</router-link>
-        </div>
-      </div>
-    </div>
-
+    </div> -->
     <router-view />
+    <div class="footer"></div>
   </div>
 </template>
 
 <style>
-#app {
-  font-family: "Avenir", Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-#nav {
-  padding: 30px;
+.header {
+  background-color: #000;
+  line-height: 70px;
+  padding-bottom: 2px;
 }
 
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
+.header .center {
+  display: flex;
+  justify-content: space-between;
+  width: 1000px;
+  margin: 0 auto;
 }
 
-#nav a.router-link-exact-active {
-  color: #42b983;
+.header .center img {
+  width: 50px;
+  height: 50px;
+  vertical-align: middle;
+}
+
+.header .center .logo {
+  line-height: 70px;
+}
+.header .center ul {
+  display: flex;
+}
+.header .center ul li {
+  color: #fff;
+  padding: 0 30px;
+  cursor: pointer;
+}
+
+.footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 150px;
+  background-color: #000;
 }
 </style>
