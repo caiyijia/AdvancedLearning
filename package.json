@@ -1,0 +1,24 @@
+{
+  "name": "high-level-learn",
+  "version": "1.0.0",
+  "description": "Web前端开发的进阶学习记录",
+  "main": "index.js",
+  "dependencies": {
+    "webpack": "^4.39.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/caiyijia/AdvancedLearning.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/caiyijia/AdvancedLearning/issues"
+  },
+  "homepage": "https://github.com/caiyijia/AdvancedLearning#readme"
+}
