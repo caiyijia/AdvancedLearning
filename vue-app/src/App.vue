@@ -12,7 +12,7 @@
         <ul class="nav">
           <router-link
             tag="li"
-            to="/"
+            to="/home"
           >Home</router-link> |
           <router-link
             tag="li"
@@ -40,12 +40,17 @@
       <router-link to="/community">社区</router-link> |
       <router-link to="/about">About</router-link>
     </div> -->
-    <router-view />
+    <router-view class="router-view" />
     <div class="footer"></div>
   </div>
 </template>
 
 <style>
+.active {
+  border-bottom: 2px solid #fff;
+  font-weight: bold;
+}
+
 .header {
   background-color: #000;
   line-height: 70px;
@@ -83,5 +88,11 @@
   width: 100%;
   height: 150px;
   background-color: #000;
+}
+
+.router-view {
+  width: 1000px;
+  margin: 0 auto;
+  padding-top: 40px;
 }
 </style>

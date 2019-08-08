@@ -8,9 +8,11 @@ Vue.use(Router)
 export default new Router({
   mode: 'history',
   base: process.env.BASE_URL,
+  linkExactActiveClass: 'active-exact',
+  linkActiveClass: 'active',
   routes: [
     {
-      path: '/',
+      path: '/home',
       name: 'home',
       component: Home
     },
@@ -34,23 +36,23 @@ export default new Router({
       name: 'community',
       component: () => import('./views/Community'),
       // redirect: '/community/academic',
-      // children: [
-      //   {
-      //     path: 'academic',
-      //     name: 'academic',
-      //     component: () => import('./views/Academic')
-      //   },
-      //   {
-      //     path: 'download',
-      //     name: 'download',
-      //     component: () => import('./views/Download')
-      //   },
-      //   {
-      //     path: 'personal',
-      //     name: 'personal',
-      //     component: () => import('./views/Personal')
-      //   }
-      // ]
+      children: [
+        {
+          path: '/community/academic',
+          name: 'academic',
+          component: () => import('./views/Community/Academic')
+        },
+        {
+          path: '/community/download',
+          name: 'download',
+          component: () => import('./views/Community/Download')
+        },
+        {
+          path: '/community/personal',
+          name: 'personal',
+          component: () => import('./views/Community/Personal')
+        }
+      ]
     },
     // {
     //   path: '/NotFound',

@@ -6,3 +6,8 @@
 ol, li, ul {
     list-style: none;
 }
+
+a {
+    color: #007;
+    text-decoration: none;
+}
