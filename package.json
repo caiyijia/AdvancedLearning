@@ -4,13 +4,15 @@
   "description": "Web前端开发的进阶学习记录",
   "main": "index.js",
   "dependencies": {
+    "@vue/cli": "^3.10.0",
     "webpack": "^4.39.1"
   },
   "devDependencies": {
     "webpack-cli": "^3.3.6"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "webpack --mode development"
   },
   "repository": {
     "type": "git",
