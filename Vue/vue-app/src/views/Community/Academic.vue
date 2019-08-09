@@ -12,6 +12,34 @@
 
 <script>
 export default {
+  // 组件内守卫
+  beforeRouteEnter (to, from, next) {
+    // const isLogin = to.matched[0].meta.login;
+    console.log(to)
+    // if(isLogin) {
+    //   next();
+    //   return
+    // }
+    const isLogin = to.matched[0].meta.login;
+    if(isLogin) {
+      next();
+      return
+    }
+    const answer = confirm('请登录账号后查看～')
+          if(answer) {
+            next()
+          }else {
+            next(false)
+          }
+  },
+  beforeRouteLeave(to, from, next) {
+    const answer = confirm('确定要离开吗？')
+    if(answer) {
+      next()
+    }else {
+      next(false)
+    }
+  },
   data() {
     return {
       questionList: [

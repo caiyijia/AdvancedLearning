@@ -14,7 +14,11 @@ export default new Router({
     {
       path: '/home',
       name: 'home',
-      component: Home
+      component: Home,
+      // beforeEnter (to, from, next) {
+      //   console.log(to, from)
+      //   next(false);
+      // }
     },
     {
       path: '/learn',
@@ -36,11 +40,24 @@ export default new Router({
       name: 'community',
       component: () => import('./views/Community'),
       redirect: '/community/academic',
+      meta: {
+        login: false
+      },
       children: [
         {
           path: '/community/academic',
           name: 'academic',
-          component: () => import('./views/Community/Academic')
+          component: () => import('./views/Community/Academic'),
+          // 路由独享守卫
+          // beforeEnter (to, from, next) {
+          // const answer = confirm('请登录账号后查看～')
+          // if(answer) {
+          //   next()
+          // }else {
+          //   next(false)
+          // }
+          // next();
+        // }
         },
         {
           path: '/community/download',
