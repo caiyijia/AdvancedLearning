@@ -1,6 +1,8 @@
 <template>
 <div>
     添加学生：
+    <!-- {{storeName}} {{storeAge}} {{storeLook}} {{a}} -->
+    <!-- {{name}} {{age}} {{look}} -->
     <input type="text" v-model="name">
     <button @click="add">确认添加</button>
 </div>
@@ -8,17 +10,51 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
+
 export default {
     data() {
         return {
-            name:''
+            name:'',
+            // storeName: this.$store.state.name
         }
     },
+    // computed: {
+    //     storeName() {
+    //         return this.$store.state.name
+    //     },
+    //     storeAge() {
+    //         return this.$store.state.age
+    //     },
+    //     storeLook() {
+    //         return this.$store.state.look
+    //     }
+    // },
+    computed: 
+        // mapState(['name', 'age', 'look']),
+        // mapState({
+        //     storeName: state => state.name,
+        //     storeAge: state => state.age,
+        //     storeLook: state => state.look
+        // }),
+        {
+            ...mapState({
+            storeName: state => state.name,
+            storeAge: state => state.age,
+            storeLook: state => state.look
+        }),
+        a() {
+            return '111'
+        }
+    },
+
     methods: {
         add() {
             // this.$emit('add', this.name)
             // console.log(this.bus);
-            this.bus.$emit('add', this.name)
+            // this.bus.$emit('add', this.name)
+            // this.$store.state.name += ' + 1'
+            this.$store.state.studentList.push(this.name)
             
         }
     },
