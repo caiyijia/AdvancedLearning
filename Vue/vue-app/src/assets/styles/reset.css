@@ -11,3 +11,8 @@ a {
     color: #007;
     text-decoration: none;
 }
+button {
+    outline: none;
+    bottom: none;
+    cursor: pointer;
+}
