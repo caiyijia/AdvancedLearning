@@ -14,4 +14,10 @@ export default {
     
   }
 }
+
 </script>
+<style scoped>
+div {
+  color: red;
+}
+</style>

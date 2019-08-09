@@ -1,6 +1,5 @@
 <template>
   <div id="app">
-
     <div class="header">
       <div class="center">
         <div class="logo">
@@ -41,6 +40,7 @@
       <router-link to="/about">About</router-link>
     </div> -->
     <router-view class="router-view" />
+    <!-- <router-view class="router-view" name="academic"></router-view> -->
     <div class="footer"></div>
   </div>
 </template>

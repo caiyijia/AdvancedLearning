@@ -35,7 +35,7 @@ export default new Router({
       path: '/community',
       name: 'community',
       component: () => import('./views/Community'),
-      // redirect: '/community/academic',
+      redirect: '/community/academic',
       children: [
         {
           path: '/community/academic',
@@ -54,10 +54,15 @@ export default new Router({
         }
       ]
     },
-    // {
-    //   path: '/NotFound',
-    //   component: () => import('./views/NotFound')
-    // },
+    {
+      path: '/NotFound',
+      component: () => import('./views/NotFound')
+    },
+    {
+      path: '/question/:id',
+      name: 'question',
+      component: () => import('./views/Question')
+    },
     {
       path: '*',
       redirect (to) {
