@@ -50,7 +50,7 @@ export default {
     },
 
     methods: {
-        ...mapActions(['changeStudent'])
+        ...mapActions('student', ['changeStudent'])
         // add() {
         //     // this.$emit('add', this.name)
         //     // console.log(this.bus);
