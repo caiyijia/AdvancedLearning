@@ -16,6 +16,7 @@ export default {
     data() {
         return {
             name:'',
+            
             // storeName: this.$store.state.name
         }
     },
