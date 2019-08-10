@@ -25,5 +25,13 @@ function proxyObj(obj) {
     }
 }
 proxyObj(obj)
+obj.x = 3
+// console.log(obj.x);
 
-console.log(obj.x);
+var proxy = new Proxy(obj, {
+    get: function(obj, x) {
+        console.log('----')
+        return obj.x
+    }
+})
+console.log(proxy.x)
