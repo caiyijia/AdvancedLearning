@@ -31,7 +31,7 @@ obj.x = 3
 var proxy = new Proxy(obj, {
     get: function(obj, x) {
         console.log('----')
-        return obj.x
+        return Reflect.get(obj, 'x');
     }
 })
 console.log(proxy.x)
