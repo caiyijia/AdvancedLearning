@@ -3,14 +3,14 @@
     添加学生：
     <!-- {{storeName}} {{storeAge}} {{storeLook}} {{a}} -->
     <!-- {{name}} {{age}} {{look}} -->
-    <input type="text" v-model="name">
-    <button @click="add">确认添加</button>
+    <input type="text" v-model="name" @keyup.enter="changeStudent({name, number: 1})">
+    <button @click="changeStudent({name, number: 1})">确认添加</button>
 </div>
 
 </template>
 
 <script>
-import { mapState } from 'vuex';
+import { mapState , mapActions} from 'vuex';
 
 export default {
     data() {
@@ -50,14 +50,16 @@ export default {
     },
 
     methods: {
-        add() {
-            // this.$emit('add', this.name)
-            // console.log(this.bus);
-            // this.bus.$emit('add', this.name)
-            // this.$store.state.name += ' + 1'
-            this.$store.state.studentList.push(this.name)
+        ...mapActions(['changeStudent'])
+        // add() {
+        //     // this.$emit('add', this.name)
+        //     // console.log(this.bus);
+        //     // this.bus.$emit('add', this.name)
+        //     // this.$store.state.name += ' + 1'
+        //     // this.$store.state.studentList.push(this.name)
+        //     this.$store.dispatch('changeStudent', {name: this.name, number: 1})
             
-        }
+        // }
     },
 }
 </script>

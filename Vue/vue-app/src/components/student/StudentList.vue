@@ -1,10 +1,10 @@
 <template>
     <div>学生列表:
         <ul>
-            <li v-for="(item, index) in student"
+            <li v-for="(item, index) in studentList"
                 :key="item+index"
             >
-                {{item}}
+            {{index+1}} - {{item}}
             </li>
         </ul>
     </div>
