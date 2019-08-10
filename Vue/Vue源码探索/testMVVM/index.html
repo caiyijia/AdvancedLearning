@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Model–view–viewmodel</title>
+    <script src="index.js"></script>
+</head>
+<body>
+    <div id="test">
+        <div>Temperature: {{wd}}</div>
+        <div>Humidity: {{sd}}</div>
+        <div>体感温度：<input type="text"></div>
+    </div>
+
+    <script>
+        var testMapping = new MyMVVM('test', {
+            wd: 21,
+            sd: 86
+        })
+    </script>
+</body>
+</html>
