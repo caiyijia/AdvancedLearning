@@ -21,12 +21,13 @@ function render(el, originTemplate, templates, data) {
 function deepClone(obj) {
     return JSON.parse(JSON.stringify(obj));
 }
+
 function proxyObj(obj, newObj) {
     var self = this;
-    for(let temp in obj) {
-        if(temp instanceof Object){
+    for (let temp in obj) {
+        if (temp instanceof Object) {
             proxyObj(obj[temp], newObj[temp])
-        }else {
+        } else {
             Object.defineProperty(obj, temp, {
                 get: function () {
                     // console.log('---');
@@ -41,10 +42,37 @@ function proxyObj(obj, newObj) {
                 }
             })
         }
-        
     }
 }
 
+function VNode(dom, type, value) {
+    this.dom = dom;
+    this.type = type;
+    this.value = value;
+    this.childNodes = [];
+    this.appendChild = function (vnode) {
+        if (!(vnode instanceof VNode)) {
+            throw new Error('node is not instanceof VNode!')
+        }
+        this.childNodes.push(vnode)
+    }
+}
+
+function buildVirtualNode(node) {
+    var temp = new VNode(node, node.nodeType, node.nodeValue);
+    for (let i = 0; i < node.childNodes.length; i++) {
+        if (node.childNodes[i].nodeType == 1) {
+            let child = buildVirtualNode.call(this, node.childNodes[i]);
+            temp.appendChild(child);
+        } else if (node.childNodes[i].nodeType == 3) {
+            let child = buildVirtualNode.call(this, node.childNodes[i]);
+            temp.appendChild(child)
+        } else {
+            continue;
+        }
+    }
+    return temp;
+}
 
 function MyMVVM(id, data) {
     this.id = id;
@@ -54,7 +82,8 @@ function MyMVVM(id, data) {
     this.templates = analysisTemplate(this.el.innerHTML);
     this.cloneObj = deepClone(this.data);
     proxyObj.call(this, this.data, this.cloneObj);
-    render(this.el, this.originTemplate, this.templates, this.data)
+    render(this.el, this.originTemplate, this.templates, this.data);
+    this.vNodeRoot = buildVirtualNode(this.el)
 }
 
 window.onload = function () {
