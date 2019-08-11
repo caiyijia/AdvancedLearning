@@ -65,6 +65,18 @@ function buildVirtualNode(node) {
             let child = buildVirtualNode.call(this, node.childNodes[i]);
             temp.appendChild(child);
         } else if (node.childNodes[i].nodeType == 3) {
+            // console.log(node.childNodes[i]);
+            var arr = analysisTemplate(node.childNodes[i].nodeValue);
+            for(let j = 0; arr && j < arr.length; j++){
+                if(this.mapping.get(arr[j])){
+                    let templateArr = this.mapping.get(arr[i]);
+                    // console.log(templateArr)
+                    templateArr.push(node.childNodes[i]);
+                    this.mapping.set(arr[j], templateArr);
+                }else {
+                    this.mapping.set(arr[j], [node.childNodes[i]])
+                }
+            }
             let child = buildVirtualNode.call(this, node.childNodes[i]);
             temp.appendChild(child)
         } else {
@@ -81,9 +93,10 @@ function MyMVVM(id, data) {
     this.originTemplate = this.el.innerHTML;
     this.templates = analysisTemplate(this.el.innerHTML);
     this.cloneObj = deepClone(this.data);
+    this.mapping = new Map();
     proxyObj.call(this, this.data, this.cloneObj);
+    this.vNodeRoot = buildVirtualNode.call(this, this.el);
     render(this.el, this.originTemplate, this.templates, this.data);
-    this.vNodeRoot = buildVirtualNode(this.el)
 }
 
 window.onload = function () {
