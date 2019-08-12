@@ -1,5 +1,6 @@
 import React from 'react'
 import { render } from 'react-dom'
-import ToDoList from './components/ToDoList';
+// import ToDoList from './components/ToDoList';
+import Control from './components/Control';
 
-render(<ToDoList></ToDoList>, document.getElementById('root'))
+render(<Control></Control>, document.getElementById('root'))
