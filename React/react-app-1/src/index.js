@@ -1,32 +1,29 @@
 import React from 'react';
 import { render } from 'react-dom'
 import { 
-    BrowserRouter as Router, Route, Switch, NavLink
+    BrowserRouter as Router, Route, Switch, Redirect
 } from 'react-router-dom'
-import Home from './pages/Home';
-import Activities from './pages/Activities';
-import Topics from './pages/Topics';
-import Login from './pages/Login';
+import Home from './pages/home/Home';
+import Activities from './pages/activities/Activities';
+import Topics from './pages/topics/Topics';
+import Login from './pages/login/Login';
 import './styles/index.css';
-import './styles/reset.css'
+import App from './App'
 // import Test from './pages/Test'
 
 render(
     <Router>
-        <div className="nav">
-            <NavLink to='/'>首页</NavLink>
-            <NavLink to='/activities'>动态</NavLink>
-            <NavLink to='/topics'>话题</NavLink>
-            <NavLink to='/login'>登陆</NavLink>
-        </div>
-        <div className="content">
+    
+        <App>
         <Switch>
-        <Route path='/' component={ Home }></Route>
-        <Route path='/activities' component={Activities}></Route>
-        <Route path='/topics' component={Topics}></Route>
-        <Route path='/login' component={Login}></Route>
+            <Route path='/'  exact component={ Home }></Route>
+            <Route path='/activities' component={Activities}></Route>
+            <Route path='/topics' component={Topics}></Route>
+            <Route path='/login' component={Login}></Route>
+            <Redirect to='/'></Redirect>
         </Switch>
-        </div>
+        </App>
+    
     </Router>,
     
     document.getElementById('root'));

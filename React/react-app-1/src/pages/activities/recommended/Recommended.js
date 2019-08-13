@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 
-class Activities extends Component {
+class Recommended extends Component {
 
   render () {
     return (
-      <div>Activity</div>
+      <div>推荐</div>
     )
   }
 
 }
 
-export default Activities;
+export default Recommended;
