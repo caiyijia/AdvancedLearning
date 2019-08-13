@@ -1,5 +1,6 @@
 import React from 'react'
-import ChildLifeCycle from './ChildLifeCycle';
+// import ChildLifeCycle from './ChildLifeCycle';
+import NewLifeCycle from './NewLifeCycle';
 
 
 class LifeCycle extends React.Component {
@@ -9,13 +10,16 @@ class LifeCycle extends React.Component {
         console.log('1. constructor')
         super();
         this.state = {
-            count: 0
+            count: 0,
+            // childCount: 0
+            // a: nextProps.n
         }
     }
-    componentWillMount() {
+    UNSAFE_componentWillMount() {
         // ajax 官方不建议 17.x 移除
         /* In React 17.x, only the UNSAFE_ name will work. To rename all deprecated lifecycles to their new names, you can run `npx react-codemod rename-unsafe-lifecycles` in your project source folder.
-        console.log('1. willMount') */
+         */
+        console.log('1. willMount')
     }
 
     render() {
@@ -28,9 +32,10 @@ class LifeCycle extends React.Component {
                 <button onClick={this.handleClick}>增加count的值</button>
             </div>
             {
-                this.state.count === 0 && <ChildLifeCycle></ChildLifeCycle>
+                // this.state.count === 0 && <ChildLifeCycle></ChildLifeCycle>
+
             }
-            
+                <NewLifeCycle n={this.state.count}></NewLifeCycle>
             </>
         )
     }
@@ -46,7 +51,7 @@ class LifeCycle extends React.Component {
         return !true
     }
 
-    componentWillUpdate() {
+    UNSAFE_componentWillUpdate() {
         console.log('1. willUpdate')
     }
 
