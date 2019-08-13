@@ -1,6 +1,7 @@
 import React from 'react'
 import { render } from 'react-dom'
-import ToDoWrapper from './components/ToDoWrapper';
+import LifeCycle from './components/LifeCycle';
+// import ToDoWrapper from './components/ToDoWrapper';
 // import Person from './components/Person';
 
 // const person = {
@@ -15,4 +16,4 @@ import ToDoWrapper from './components/ToDoWrapper';
 //     salary: 1000
 // }
 
-render(<ToDoWrapper></ToDoWrapper>, document.getElementById('root'))
+render(<LifeCycle></LifeCycle>, document.getElementById('root'))
