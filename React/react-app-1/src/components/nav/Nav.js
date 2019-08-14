@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { NavLink, withRouter } from 'react-router-dom'
-
+import MenuLink from '../MenuLink'
 import './style.css'
 
 // const withRouter = (Component) => () => {
@@ -15,12 +15,12 @@ class Nav extends Component {
 				<span className="logo" onClick={this.handleClick}>
 					慌得要死
         </span>
-				<NavLink to="/" exact>
+				<MenuLink to="/" exact>
 					首页
-        </NavLink>
-				<NavLink to="/activities">动态</NavLink>
-				<NavLink to="/topics">话题</NavLink>
-				<NavLink to="/login">登录</NavLink>
+        </MenuLink>
+				<MenuLink to="/activities">动态</MenuLink>
+				<MenuLink to="/topics">话题</MenuLink>
+				<MenuLink to="/login">登录</MenuLink>
 			</div>
 		)
 	}

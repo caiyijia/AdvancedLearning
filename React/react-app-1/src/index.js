@@ -11,6 +11,7 @@ import './styles/index.css';
 import App from './App'
 import Articles from './pages/activities/articles/Articles';
 import PrivateRoute from './components/PrivateRoute'
+import NoMatch from './pages/noMatch/NoMatch'
 
 render(
     <Router>
@@ -22,7 +23,8 @@ render(
             <PrivateRoute path='/topics' component={Topics}></PrivateRoute>
             <Route path='/login' component={Login}></Route>
             <Route path="/article/:id" component={Articles}></Route>
-            <Redirect to='/'></Redirect>
+            <Route path="/error.html" component={ NoMatch }></Route>
+            <Redirect to='/error.html'></Redirect>
         </Switch>
         </App>
     

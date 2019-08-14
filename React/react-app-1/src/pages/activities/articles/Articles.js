@@ -13,11 +13,11 @@ const Articles = ({ match, location }) => {
         <div>
           文章作者：
           {/* location只能接受跳转过来的的内容 */}
-          <span>{ location.state.author }</span>
+          <span>{ location.state && location.state.author }</span>
         </div>
         <div>
           文章标题：
-          <span>{ location.state.title }</span>
+          <span>{ location.state && location.state.title }</span>
         </div>
       </div>
   )

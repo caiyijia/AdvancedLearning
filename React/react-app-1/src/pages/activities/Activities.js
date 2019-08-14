@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Switch, Route, Redirect } from 'react-router-dom';
+import { Switch, Route, Redirect, Prompt } from 'react-router-dom';
 import ActivitiesNav from '../../components/activitiesNav/ActivitiesNav';
 
 import Recommended from './recommended/Recommended';
@@ -13,6 +13,14 @@ class Activities extends Component {
 
   render () {
     return (
+      <>
+      <Prompt message={(location)=>{
+        // console.log(location)
+        if(!location.pathname.includes('/activities')){
+          return window.confirm('确定要离开吗？')
+        }
+        return true
+      }} ></Prompt>
       <div className="activities">
         <ActivitiesNav></ActivitiesNav>
         <div className="content">
@@ -26,6 +34,7 @@ class Activities extends Component {
           </Switch>
         </div>
       </div>
+      </>
     )
   }
 
