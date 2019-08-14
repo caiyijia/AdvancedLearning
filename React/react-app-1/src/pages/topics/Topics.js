@@ -12,7 +12,7 @@ class Topics extends Component {
     return (
       <ul className="topics">
         {
-          this.state.articleList.map( item => (
+          this.state.articleList.reverse().map( item => (
             <li key={ item.id } className="topic-box">
               <span>{ item.author }</span>
               <Link to={{

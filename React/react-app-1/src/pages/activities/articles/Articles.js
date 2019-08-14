@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
+import React from 'react';
+import './style.css'
 
-class Articles extends Component {
-  
-  render () {
-    const { match, location } = this.props;
-    return (
-      <div className="article">
+// 只负责渲染，用函数组件
+const Articles = ({ match, location }) => {
+
+  return (
+    <div className="article">
         <div>
           文章ID：
           <span>{ match.params.id }</span>
@@ -20,9 +20,8 @@ class Articles extends Component {
           <span>{ location.state.title }</span>
         </div>
       </div>
-    )
-  }
-
+  )
 }
+
 
 export default Articles;
