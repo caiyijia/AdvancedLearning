@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import store from '../store'
+// import * as Types from '../store/actionTypes'
+import * as Actions from '../store/actionCreators'
 
 class TodoList extends Component {
 
@@ -13,56 +15,50 @@ class TodoList extends Component {
     componentDidMount() {
         store.subscribe(this.handleStoreChange)
     }
-    
-    render () {
+
+    render() {
         // console.log(store.getState());
         return (
             <>
-            <div>
-                <input value={this.state.inpVal} type="text"  onChange={this.handleChange}/>
-                <button onClick={this.handleAdd}>添加</button>
-            </div>
-            <ul>
-                {this.state.list.map((item, index)=> (
-                    <li key={index} style={{listStyle: 'circle'}}>
-                        {item} 
-                        <button onClick={()=>this.handleDlt(index)}>x</button>
-                    </li>
-                ))}
-            </ul>
+                <div>
+                    <input value={this.state.inpVal} type="text" onChange={this.handleChange} />
+                    <button onClick={this.handleAdd}>添加</button>
+                </div>
+                <ul>
+                    {this.state.list.map((item, index) => (
+                        <li key={index} style={{ listStyle: 'circle' }}>
+                            {item}
+                            <button onClick={() => this.handleDlt(index)}>x</button>
+                        </li>
+                    ))}
+                </ul>
             </>
         )
     }
 
-    handleChange = (e)=> {
-        const action = {
-            type: 'CHANGE_INPUT_VAL',
-            value: e.target.value
-        }
+    handleChange = (e) => {
+        const action = Actions.getTodoChangeInputValAction(e.target.value)
         store.dispatch(action);
     }
 
-    
-
     handleAdd = () => {
-        const action = {
-            type: 'ADD_TODO_ITEM',
-            value: this.state.inpVal
-        }
-        store.dispatch( action );
+        // const action = {
+        //     type: Types.ADD_TODO_ITEM,
+        //     value: this.state.inpVal
+        // }
+        const action = Actions.getTodoAddTodoItemAction(this.state.inpVal)
+        store.dispatch(action);
         // console.log(action)
+    }
+
+    handleDlt = (index) => {
+        const action = 
+        Actions.getTodoDeleteItemAction(index)
+        store.dispatch(action)
     }
 
     handleStoreChange = () => {
         this.setState(store.getState())
-    }
-
-    handleDlt = (index) => {
-        const action = {
-            type: 'DELETE_TODO_ITEM',
-            index
-        }
-        store.dispatch(action)
     }
 }
 
