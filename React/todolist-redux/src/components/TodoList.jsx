@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import store from '../store'
 // import * as Types from '../store/actionTypes'
-import * as Actions from '../store/actionCreators'
+import * as Actions from '../store/actions/todoList'
 
 class TodoList extends Component {
 
@@ -10,7 +10,7 @@ class TodoList extends Component {
     //     list: store.getState().list
     // }
 
-    state = store.getState()
+    state = store.getState().todoList
 
     componentDidMount() {
         store.subscribe(this.handleStoreChange)
@@ -58,7 +58,7 @@ class TodoList extends Component {
     }
 
     handleStoreChange = () => {
-        this.setState(store.getState())
+        this.setState(store.getState().todoList)
     }
 }
 

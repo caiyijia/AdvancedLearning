@@ -1,17 +1,16 @@
 import React, { Component } from 'react';
 import store from '../store'
-import { getCountAddAction } from '../store/actionCreators'
+import { getCountAddAction } from '../store/actions/counter'
 class CCC extends Component {
 
-    state = {
-        count: store.getState().count
-    }
+    state = store.getState().counter
+    
 
     componentDidMount() {
         store.subscribe(() => {
-            this.setState({
-                count: store.getState().count
-            })
+            this.setState(
+                store.getState().counter
+            )
         })
     }
 

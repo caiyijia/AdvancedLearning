@@ -1,4 +1,4 @@
-import * as Types from './actionTypes'
+import * as Types from '../actionTypes'
 export const getTodoChangeInputValAction = (value) => {
     return {
         type: Types.CHANGE_INPUT_VAL,
@@ -17,12 +17,5 @@ export const getTodoDeleteItemAction = (index) => {
     return {
         type: Types.DELETE_TODO_ITEM,
         index
-    }
-}
-
-export const getCountAddAction = (n) => {
-    return {
-        type: Types.COUNT_ADD,
-        n
     }
 }
