@@ -10,7 +10,7 @@ import Login from './pages/login/Login';
 import './styles/index.css';
 import App from './App'
 import Articles from './pages/activities/articles/Articles';
-// import Test from './pages/Test'
+import PrivateRoute from './components/PrivateRoute'
 
 render(
     <Router>
@@ -19,7 +19,7 @@ render(
         <Switch>
             <Route path='/'  exact component={ Home }></Route>
             <Route path='/activities' component={Activities}></Route>
-            <Route path='/topics' component={Topics}></Route>
+            <PrivateRoute path='/topics' component={Topics}></PrivateRoute>
             <Route path='/login' component={Login}></Route>
             <Route path="/article/:id" component={Articles}></Route>
             <Redirect to='/'></Redirect>
