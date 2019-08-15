@@ -1,6 +1,6 @@
 // import todoList from './store/reducers/todoList';
 // import counter from './store/reducers/counter'
-
+// import { compose } from 'redux'
 // 1. reducer  2. {}   3. function(){}
 
 const ActionTypes = {
@@ -111,3 +111,28 @@ export const bindActionCreators = (actions, dispatch) => {
 
     return boundAction;
 }
+
+export const compose = (...funcs) => {
+    return funcs.reduce((last, now) => {
+        return (...args) => {
+            return last(now(...args))
+        }
+    })
+}
+
+export const applyMiddleware = (...middleware) => (createStore) =>  (reducer, preloadedState) => {
+    const store = createStore(reducer, preloadedState);
+    let dispatch = store.dispatch;
+
+    const middlewareAPIs = middleware.map(item=>item({
+        getState: store.getState,
+        dispatch: action => dispatch(action)
+    }))
+
+    dispatch = compose(...middlewareAPIs)(dispatch);
+    return {
+        ...store,
+        dispatch
+    }
+}
+
