@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux'
 // import store from '../store'
 // import * as Types from '../store/actionTypes'
-import * as Actions from '../store/actions/todoList'
+import * as actions from '../store/actions/todoList'
+
 
 class TodoList extends Component {
 
@@ -46,7 +47,7 @@ class TodoList extends Component {
     }
 
     handleDlt = (index) => {
-        this.props.deldeteItem(index)
+        this.props.deleteItem(index)
     }
 
     // handleStoreChange = () => {
@@ -59,16 +60,18 @@ const mapStateToProps = (state) => ({
     list: state.todoList.list
 })
 
-const mapDispatchToProps = (dispatch) => ({
-    changeVal: (val) => {
-        dispatch(Actions.getTodoChangeInputValAction(val))
-    },
-    addItem: (val) => {
-        dispatch(Actions.getTodoAddTodoItemAction(val))
-    },
-    deldeteItem: (index) => {
-        dispatch(Actions.getTodoDeleteItemAction(index))
-    }
-})
+// const mapDispatchToProps = (dispatch) => ({
+//     changeVal: (val) => {
+//         dispatch(Actions.getTodoChangeInputValAction(val))
+//     },
+//     addItem: (val) => {
+//         dispatch(Actions.getTodoAddTodoItemAction(val))
+//     },
+//     deldeteItem: (index) => {
+//         dispatch(Actions.getTodoDeleteItemAction(index))
+//     }
+// })
 
-export default connect(mapStateToProps, mapDispatchToProps)(TodoList);
+// const mapDispatchToProps = (dispatch) => bindActionCreators(actions, dispatch)
+
+export default connect(mapStateToProps, actions)(TodoList);
