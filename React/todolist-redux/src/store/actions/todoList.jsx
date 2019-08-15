@@ -1,4 +1,6 @@
 import * as Types from '../actionTypes'
+import axios from 'axios'
+// import thunk from 'redux-thunk';
 export const changeVal = (value) => {
     return {
         type: Types.CHANGE_INPUT_VAL,
@@ -21,8 +23,28 @@ export const deleteItem = (index) => {
 }
 
 export const getInitList = (list) => {
-    return {
-        type: Types.GET_INIT_LIST,
-        list
-    }
+    return new Promise((resolve, reject) => {
+        axios.get('list.json').then(res => {
+            resolve({
+                type: Types.GET_INIT_LIST,
+                list: res
+            })
+        })
+    })
+    // return (dispatch) => {
+    //     axios.get('list.json').then(res => {
+    //         dispatch({
+    //             type: Types.GET_INIT_LIST,
+    //             list: res
+    //         })
+    //     })
+    // }
+    // let data;
+    // axios.get('list.json').then(res => {
+    //     data = res
+    // })
+    // return {
+    //     type: Types.GET_INIT_LIST,
+    //     list
+    // }
 }

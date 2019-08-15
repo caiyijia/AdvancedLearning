@@ -12,7 +12,7 @@ axios.interceptors.response.use(res => {
 })
 
 axios.interceptors.request.use(config => {
-    console.log(config);
+    // console.log(config);
     config.headers.token = Math.random().toFixed(15) * 1e15;
     return config
 })
@@ -22,10 +22,7 @@ class TodoList extends Component {
     componentDidMount () {
         axios.get('/list.json').then(res => {
             // console.log(res);
-            this.props.getInitList(res)
-            // const list = res.data.data
-            // this.props.getInitList(list)
-            // console.log(this.props)
+            this.props.getInitList()
         })
     }
 
