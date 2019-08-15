@@ -1,14 +1,16 @@
 import React, { Component } from 'react';
 import store from '../store';
+import * as Actions from '../store/actions/todoList';
 
-// store.getState()
 
 class c extends Component {
 
-  state = store.getState()
+  state = store.getState().todoList
 
   componentDidMount () {
-    store.subscribe(this.handleStoreChange);
+    store.subscribe(()=>{
+      this.setState(store.getState().todoList);
+    });
   }
 
   render () {
@@ -33,31 +35,18 @@ class c extends Component {
   }
 
   handleChange = (e) => {
-    const action = {
-      type: 'CHANGE_INPUT_VAL',
-      value: e.target.value
-    }
+    const action = Actions.getTodoChangeInputValAction(e.target.value);
     store.dispatch(action);
   }
 
   handleAdd = () => {
-    const action = {
-      type: 'ADD_TODO_ITEM',
-      value: this.state.inpVal
-    }
+    const action = Actions.getTodoAddItemAction( this.state.inpVal );
     store.dispatch( action );
   }
 
   handleDelete = (index) => {
-    const action = {
-      type: 'DELETE_TODO_ITEM',
-      index
-    }
+    const action = Actions.getTodoDeleteItemAction(index);
     store.dispatch(action);
-  }
-
-  handleStoreChange = () => {
-    this.setState(store.getState());
   }
 }
 

@@ -1,6 +1,9 @@
+import todoList from './store/reducers/todoList';
+import counter from './store/reducers/counter'
+
 // 1. reducer  2. {}   3. function(){}
 
-const ActionType = {
+const ActionTypes = {
     INIT: '@@redux/INIT'
 }
 export const createStore = (reducer, preloadedState, enhancer) => {
@@ -48,10 +51,48 @@ export const createStore = (reducer, preloadedState, enhancer) => {
         }
     }
 
-    dispatch({type: ActionType.INIT})
+    dispatch({type: ActionTypes.INIT})
     return {
         getState,
         dispatch,
         subscribe
     }
 }
+
+
+export const combineReducers = reducers => {
+    const finalReducers = {};
+    for(let key in reducers) {
+        const reducer = reducers[key];
+
+        if(typeof reducer === 'undefined') {
+            console.error(`reducer ${key} 的值是 undefined`)
+        }
+        if(typeof reducer === 'function') {
+            finalReducers[key] = reducer;
+        }
+    }
+
+    for(let key in finalReducers) {
+        const reducer = finalReducers[key];
+        reducer(undefined, {type:ActionTypes.INIT})
+
+        // if(typeof state === 'undefined') {
+        //     throw new Error(`Reducer ${key} 的值不能为undefined`)
+        // }
+    }
+
+    return (state={}, action) => {
+        for(let key in finalReducers) {
+            const reducer = finalReducers[key];
+            const newState = reducer(state[key], action);
+            state[key] = newState;
+        }
+
+        // state['todoList'] = todoList;
+        // state['counter'] = counter;
+        return state;
+    }
+}
+
+// console.log(combineReducers(reducers)(undefined, {type: ActionTypes.INIT}))
