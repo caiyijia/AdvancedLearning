@@ -7,6 +7,6 @@ import store from './store'
 
 render(<Provider store={store}>
     <Counter />
-    {/* <TodoList /> */}
+    <TodoList />
     </Provider>, document.getElementById('root'));
 

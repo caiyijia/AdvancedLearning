@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import store from '../store'
+import { connect } from 'react-redux'
+// import store from '../store'
 // import * as Types from '../store/actionTypes'
 import * as Actions from '../store/actions/todoList'
 
@@ -10,22 +11,22 @@ class TodoList extends Component {
     //     list: store.getState().list
     // }
 
-    state = store.getState().todoList
+    // state = store.getState().todoList
 
-    componentDidMount() {
-        store.subscribe(this.handleStoreChange)
-    }
+    // componentDidMount() {
+    //     store.subscribe(this.handleStoreChange)
+    // }
 
     render() {
-        // console.log(store.getState());
+        const { inpVal, list } = this.props
         return (
             <>
                 <div>
-                    <input value={this.state.inpVal} type="text" onChange={this.handleChange} />
+                    <input value={inpVal} type="text" onChange={this.handleChange} />
                     <button onClick={this.handleAdd}>添加</button>
                 </div>
                 <ul>
-                    {this.state.list.map((item, index) => (
+                    {list.map((item, index) => (
                         <li key={index} style={{ listStyle: 'circle' }}>
                             {item}
                             <button onClick={() => this.handleDlt(index)}>x</button>
@@ -37,29 +38,37 @@ class TodoList extends Component {
     }
 
     handleChange = (e) => {
-        const action = Actions.getTodoChangeInputValAction(e.target.value)
-        store.dispatch(action);
+        this.props.changeVal(e.target.value)
     }
 
     handleAdd = () => {
-        // const action = {
-        //     type: Types.ADD_TODO_ITEM,
-        //     value: this.state.inpVal
-        // }
-        const action = Actions.getTodoAddTodoItemAction(this.state.inpVal)
-        store.dispatch(action);
-        // console.log(action)
+        this.props.addItem( this.props.inpVal )
     }
 
     handleDlt = (index) => {
-        const action = 
-        Actions.getTodoDeleteItemAction(index)
-        store.dispatch(action)
+        this.props.deldeteItem(index)
     }
 
-    handleStoreChange = () => {
-        this.setState(store.getState().todoList)
-    }
+    // handleStoreChange = () => {
+    //     this.setState(store.getState().todoList)
+    // }
 }
 
-export default TodoList;
+const mapStateToProps = (state) => ({
+    inpVal: state.todoList.inpVal,
+    list: state.todoList.list
+})
+
+const mapDispatchToProps = (dispatch) => ({
+    changeVal: (val) => {
+        dispatch(Actions.getTodoChangeInputValAction(val))
+    },
+    addItem: (val) => {
+        dispatch(Actions.getTodoAddTodoItemAction(val))
+    },
+    deldeteItem: (index) => {
+        dispatch(Actions.getTodoDeleteItemAction(index))
+    }
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(TodoList);

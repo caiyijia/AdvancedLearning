@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import store from '../store'
+// import store from '../store'
 import { getCountAddAction } from '../store/actions/counter'
 import { connect } from 'react-redux'
 class counter extends Component {
