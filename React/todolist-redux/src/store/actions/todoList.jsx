@@ -19,3 +19,10 @@ export const deleteItem = (index) => {
         index
     }
 }
+
+export const getInitList = (list) => {
+    return {
+        type: Types.GET_INIT_LIST,
+        list
+    }
+}

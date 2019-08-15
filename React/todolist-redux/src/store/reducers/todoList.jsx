@@ -23,6 +23,10 @@ export default (state=initState, action) => {
             // console.log(newState.list)
             return newState;
 
+        case Types.GET_INIT_LIST:
+            newState.list = action.list;
+            return newState;
+
         default:
             break;
     }

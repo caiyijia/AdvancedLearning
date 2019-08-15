@@ -3,20 +3,25 @@ import { connect } from 'react-redux'
 // import store from '../store'
 // import * as Types from '../store/actionTypes'
 import * as actions from '../store/actions/todoList'
-
+import axios from 'axios';
+axios.interceptors.response.use(res => {
+    if(res.data.code === 0 ){
+        return res.data.data;
+    }
+    return Promise.reject('请求出错')
+})
 
 class TodoList extends Component {
 
-    // state = {
-    //     inpVal: store.getState().inpVal,
-    //     list: store.getState().list
-    // }
-
-    // state = store.getState().todoList
-
-    // componentDidMount() {
-    //     store.subscribe(this.handleStoreChange)
-    // }
+    componentDidMount () {
+        axios.get('/list.json').then(res => {
+            console.log(res);
+            this.props.getInitList(res)
+            // const list = res.data.data
+            // this.props.getInitList(list)
+            // console.log(this.props)
+        })
+    }
 
     render() {
         const { inpVal, list } = this.props
