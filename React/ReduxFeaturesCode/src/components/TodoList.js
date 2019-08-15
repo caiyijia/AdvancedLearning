@@ -1,28 +1,23 @@
 import React, { Component } from 'react';
-import store from '../store';
-import * as Actions from '../store/actions/todoList';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import * as actions from '../store/actions/todoList';
 
 
-class c extends Component {
+class TodoList extends Component {
 
-  state = store.getState().todoList
-
-  componentDidMount () {
-    store.subscribe(()=>{
-      this.setState(store.getState().todoList);
-    });
-  }
 
   render () {
+    const { inpVal, list } = this.props;
     return (
       <>
         <div>
-          <input value={ this.state.inpVal } onChange={ this.handleChange }></input>
+          <input value={ inpVal } onChange={ this.handleChange }></input>
           <button onClick={ this.handleAdd }>添加</button>
         </div>
         <ul>
           {
-            this.state.list.map( (item, index) => (
+            list.map( (item, index) => (
               <li key={item + index}>
                 { item }
                 <button onClick={ ()=>{ this.handleDelete(index) } }>X</button>
@@ -35,19 +30,35 @@ class c extends Component {
   }
 
   handleChange = (e) => {
-    const action = Actions.getTodoChangeInputValAction(e.target.value);
-    store.dispatch(action);
+    this.props.changeVal(e.target.value);
   }
 
   handleAdd = () => {
-    const action = Actions.getTodoAddItemAction( this.state.inpVal );
-    store.dispatch( action );
+    this.props.addItem(this.props.inpVal);
   }
 
   handleDelete = (index) => {
-    const action = Actions.getTodoDeleteItemAction(index);
-    store.dispatch(action);
+    this.props.deleteItem(index)
   }
 }
 
-export default c;
+const mapStateToProps = (state) => ({
+  inpVal: state.todoList.inpVal,
+  list: state.todoList.list
+})
+
+// const mapDispatchToProps = (dispatch) => ({
+//   changeVal: (val) => {
+//     dispatch(Actions.getTodoChangeInputValAction(val))
+//   },
+//   addItem: (val) => {
+//     dispatch(Actions.getTodoAddItemAction(val))
+//   },
+//   deleteItem: (index) => {
+//     dispatch(Actions.getTodoDeleteItemAction(index))
+//   }
+// })
+
+// const mapDispatchToProps = (dispatch) => bindActionCreators(actions, dispatch)
+
+export default connect(mapStateToProps, actions)(TodoList);

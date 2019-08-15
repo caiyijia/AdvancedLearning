@@ -1,20 +1,20 @@
 import * as Types from '../actionTypes';
 
-export const getTodoChangeInputValAction = (value) => {
+export const changeVal = (value) => {
   return {
     type: Types.CHANGE_INPUT_VAL,
     value
   }
 }
 
-export const getTodoAddItemAction = (value) => {
+export const addItem = (value) => {
   return {
     type: Types.ADD_TODO_ITEM,
     value
   }
 }
 
-export const getTodoDeleteItemAction = (index) => {
+export const deleteItem = (index) => {
   return {
     type: Types.DELETE_TODO_ITEM,
     index

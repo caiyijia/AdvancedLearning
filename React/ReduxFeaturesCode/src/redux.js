@@ -95,4 +95,19 @@ export const combineReducers = reducers => {
     }
 }
 
-// console.log(combineReducers(reducers)(undefined, {type: ActionTypes.INIT}))
+export const bindActionCreators = (actions, dispatch) => {
+    const boundAction = {};
+
+    if(typeof actions != 'object' || actions === null){
+        throw new Error('actions should be an object and not be a null')
+    }
+
+    for(let key in actions) {
+        const actionCreator = actions[key];
+        if(typeof actionCreator === 'function'){
+            boundAction[key] = (...args) => dispatch(actionCreator(...args))
+        }
+    }
+
+    return boundAction;
+}
