@@ -1,6 +1,7 @@
 import React from 'react';
 import { render } from 'react-dom';
-import { Provider } from 'react-redux';
+// import { Provider } from 'react-redux';
+import { Provider } from './react-redux'; 
 import store from './store';
 
 import TodoList from './components/TodoList';
@@ -10,9 +11,11 @@ import Counter from './components/Counter';
 // npm install react-redux --save
 
 render(
+  <>
   <Provider store={store}>
     <Counter />
-    <TodoList />
-  </Provider>, 
+    {/* <TodoList /> */}
+  </Provider>
+  </>, 
   window.root
 );
