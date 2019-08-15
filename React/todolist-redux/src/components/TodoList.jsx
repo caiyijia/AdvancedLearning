@@ -20,10 +20,11 @@ axios.interceptors.request.use(config => {
 class TodoList extends Component {
 
     componentDidMount () {
-        axios.get('/list.json').then(res => {
-            // console.log(res);
-            this.props.getInitList()
-        })
+        this.props.getTodoData()
+        // axios.get('/list.json').then(res => {
+        //     // console.log(res);
+        //     this.props.getInitList()
+        // })
     }
 
     render() {

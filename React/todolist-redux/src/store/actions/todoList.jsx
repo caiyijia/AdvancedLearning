@@ -22,29 +22,28 @@ export const deleteItem = (index) => {
     }
 }
 
+export const getTodoData = () => {
+    return {
+        type: Types.GET_TODO_DATA
+    }
+}
+
 export const getInitList = (list) => {
-    return new Promise((resolve, reject) => {
-        axios.get('list.json').then(res => {
-            resolve({
-                type: Types.GET_INIT_LIST,
-                list: res
-            })
-        })
-    })
-    // return (dispatch) => {
+    // return new Promise((resolve, reject) => {
     //     axios.get('list.json').then(res => {
-    //         dispatch({
+    //         resolve({
     //             type: Types.GET_INIT_LIST,
     //             list: res
     //         })
     //     })
-    // }
+    // })
+    
     // let data;
     // axios.get('list.json').then(res => {
     //     data = res
     // })
-    // return {
-    //     type: Types.GET_INIT_LIST,
-    //     list
-    // }
+    return {
+        type: Types.GET_INIT_LIST,
+        list
+    }
 }
