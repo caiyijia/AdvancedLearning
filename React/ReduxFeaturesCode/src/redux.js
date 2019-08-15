@@ -1,5 +1,5 @@
-import todoList from './store/reducers/todoList';
-import counter from './store/reducers/counter'
+// import todoList from './store/reducers/todoList';
+// import counter from './store/reducers/counter'
 
 // 1. reducer  2. {}   3. function(){}
 
@@ -75,11 +75,11 @@ export const combineReducers = reducers => {
 
     for(let key in finalReducers) {
         const reducer = finalReducers[key];
-        reducer(undefined, {type:ActionTypes.INIT})
+        const state = reducer(undefined, {type:ActionTypes.INIT})
 
-        // if(typeof state === 'undefined') {
-        //     throw new Error(`Reducer ${key} 的值不能为undefined`)
-        // }
+        if(typeof state === 'undefined') {
+            throw new Error(`reducer ${key} 的值不能为undefined`)
+        }
     }
 
     return (state={}, action) => {
