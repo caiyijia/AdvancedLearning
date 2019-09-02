@@ -11,10 +11,12 @@ var fs = require("fs")
 var globalConfig = require('./config');
 // var login = require('./web/loginController')
 var loader = require('./loader');
+var log = require('./log');
 
 http.createServer(function (request, response) {
     var pathName = url.parse(request.url).pathname;
     var params = url.parse(request.url, true).query;
+    log(pathName);
     var isStatic = isStaticsRequest(pathName);
     if (isStatic) { //请求的静态文件
         try {
@@ -44,7 +46,8 @@ http.createServer(function (request, response) {
         }
     }
 
-}).listen(globalConfig['port'])
+}).listen(globalConfig['port']);
+log('服务已启动');
 
 function isStaticsRequest(pathName) {
     for (var i = 0; i < globalConfig.static_file_type.length; i++) {
