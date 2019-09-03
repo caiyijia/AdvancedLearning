@@ -27,7 +27,22 @@ function queryStudentByClassAndAge(classNum, age) {
     connection.end();
 }
 
+function queryStudentByStuNum(stuNum, success) {
+    var querySql = 'select * from student where stu_num = ?';
+    
+    connection.query(querySql, stuNum, function (err, rslt) {
+        if (err === null) {
+            console.log(rslt);
+            success(rslt);
+        } else {
+            console.log(err);
+        }
+    });
+    connection.end();
+}
+
 module.exports = {
     "queryAllStudent": queryAllStudent,
-    "queryStudentByClassAndAge": queryStudentByClassAndAge
+    "queryStudentByClassAndAge": queryStudentByClassAndAge,
+    "queryStudentByStuNum": queryStudentByStuNum
 };

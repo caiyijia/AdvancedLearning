@@ -31,7 +31,7 @@ http.createServer(function (request, response) {
         }
 
     } else { // 请求的动态数据
-        if (loader.get(pathName) !== null) {
+        if (loader.get(pathName) != null) {
             try {
                 loader.get(pathName)(request, response);
             } catch (e) {
