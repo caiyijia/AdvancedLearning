@@ -6,17 +6,26 @@
 // arguments[0] == __dirname
 
 var http = require("http");
-var url = require("url")
-var fs = require("fs")
+var url = require("url");
+var fs = require("fs");
 var globalConfig = require('./config');
 // var login = require('./web/loginController')
 var loader = require('./loader');
+var filterSet = require('./filterLoader');
 var log = require('./log');
 
 http.createServer(function (request, response) {
     var pathName = url.parse(request.url).pathname;
     var params = url.parse(request.url, true).query;
     log(pathName);
+
+    for(var i = 0; i < filterSet.length; i++ ) {
+        var flag = filterSet[i](request, response);
+        if(!flag) {
+            return;
+        }
+    }
+
     var isStatic = isStaticsRequest(pathName);
     if (isStatic) { //请求的静态文件
         try {
