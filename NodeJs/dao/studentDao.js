@@ -1,10 +1,12 @@
-var connection = require('./dbutil');
+var dbutil = require('./dbutil');
 
 function queryAllStudent(success) {
     var querySql = 'select * from student';
-
+    var connection = dbutil.createConnection();
+    
+    connection.connect();
     connection.query(querySql, function (err, rslt) {
-        if (err === null) {
+        if (err == null) {
             console.log(rslt);
             success(rslt)
         } else {
@@ -17,6 +19,8 @@ function queryAllStudent(success) {
 function queryStudentByClassAndAge(classNum, age) {
     var querySql = 'select * from student where class = ? and age = ?; ';
     var queryParams = [classNum, age]
+    var connection = dbutil.createConnection();
+    connection.connect();
     connection.query(querySql, queryParams, function (err, rslt) {
         if (err === null) {
             console.log(rslt);
@@ -28,8 +32,9 @@ function queryStudentByClassAndAge(classNum, age) {
 }
 
 function queryStudentByStuNum(stuNum, success) {
-    var querySql = 'select * from student where stu_num = ?';
-    
+    var querySql = 'select * from student where stu_num = ?; ';
+    var connection = dbutil.createConnection();
+    connection.connect();
     connection.query(querySql, stuNum, function (err, rslt) {
         if (err === null) {
             console.log(rslt);
