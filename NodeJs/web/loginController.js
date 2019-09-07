@@ -24,15 +24,28 @@ function login(request, response) {
             var res = "";
             if (result == null || result.length == 0) {
                 res = 'Fail';
+                response.writeHead(302, {
+                    "location": "/error.html"
+                });
+                response.end();
             } else {
                 if (result[0].pwd == password) {
-                    res = "OK"
+                    res = "OK";
+                    response.writeHead(302, {
+                        "location": "/main.html", "Set-Cookie": "id=" + result[0].id
+                    });
+                    response.end();
                 } else {
-                    res = "Fail"
+                    res = "Fail";
+                    response.writeHead(302, {
+                        "location": "/error.html"
+                    });
+                    response.end();
                 }
             }
-            response.write(res);
-            response.end();
+            // response.write(res);
+            // response.end();
+
         })
     })
 }
