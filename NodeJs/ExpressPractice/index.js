@@ -10,5 +10,7 @@ app.use(express.static(globalConfig["page_path"]));
 
 app.get("/getAllStudent", loader.get("/getAllStudent"));
 
+app.get("/addStudent", loader.get("/addStudent"));
+
 app.listen(globalConfig["port"]);
 
