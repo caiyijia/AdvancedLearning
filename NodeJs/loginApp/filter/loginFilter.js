@@ -5,7 +5,7 @@ function loginFilter(request, response) {
 
     var pathName = url.parse(request.url).pathname;
     if (pathName == "/login.html" || pathName == "/login" || isStaticsRequest(pathName)) {
-        console.log('Ëµ∞')
+        console.log('?ù')
         return true;
     }
 
@@ -18,7 +18,7 @@ function loginFilter(request, response) {
         }
     }
 
-    console.log('ÂÅú')
+    console.log('?ù')
     response.writeHead(302, {
         "location": "/login.html"
     });

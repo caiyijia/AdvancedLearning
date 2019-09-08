@@ -10,7 +10,7 @@ function getAllStudent(request, response) {
     })
 }
 
-path.set("/getAllStudent", getAllStudent);
+path.set("/api/getAllStudent", getAllStudent);
 
 function addStudent(request, response) {
     var params = url.parse(request.url, true).query;
@@ -22,6 +22,6 @@ function addStudent(request, response) {
     })
 }
 
-path.set("/addStudent", addStudent);
+path.set("/api/addStudent", addStudent);
 
 module.exports.path = path;
