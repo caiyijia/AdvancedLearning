@@ -21,5 +21,7 @@ app.get("/api/getAllStudent", loader.get("/api/getAllStudent"));
 
 app.get("/api/addStudent", loader.get("/api/addStudent"));
 
+app.get("/login", loader.get("/login"))
+
 app.listen(globalConfig["port"]);
 

@@ -12,7 +12,7 @@ function insertStudent(stuNum, name, stuClass, age, pwd, success) {
             console.log(rslt);
             success(rslt)
         } else {
-            throw new Error(error);
+            throw new Error(err);
         }
     });
     connection.end();
@@ -28,7 +28,7 @@ function queryAllStudent(success) {
             console.log(rslt);
             success(rslt)
         } else {
-            throw new Error(error);
+            throw new Error(err);
         }
     });
     connection.end();
@@ -43,7 +43,7 @@ function queryStudentByClassAndAge(classNum, age) {
         if (err === null) {
             console.log(rslt);
         } else {
-            throw new Error(error);
+            throw new Error(err);
         }
     });
     connection.end();
