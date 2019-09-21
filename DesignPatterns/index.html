@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <button id="oBtn">login</button>
+    <script>
+        // function Test(name) {
+        //     // var this = Object.create(Test.prototype);
+        //     if (typeof Test.instance === 'object') {
+        //         return Test.instance;
+        //     }
+        //     this.name = name;
+        //     Test.instance = this;
+
+        //     // return this;
+        // }   
+        
+        // function Test(name) {
+        //     var instance = this;
+        //     this.name = name;
+        //     Test = function () {
+        //         return instance;
+        //     }
+        // }
+
+        // var singleAlert = (function() {
+        //     var oDiv;
+        //     return function(text) {
+        //         if (typeof oDiv === 'object') {
+        //             return oDiv;
+        //         }
+        //         oDiv = document.createElement('div');
+        //         oDiv.style.display = 'none';
+        //         oDiv.innerText = text;
+        //         document.body.appendChild(oDiv);
+        //         return oDiv;
+        //     }
+        // })()
+        var CreateAlert = function (text) {
+            var oDiv = document.createElement('div');
+            oDiv.style.display = 'none';
+            oDiv.innerText = text;
+            document.body.appendChild(oDiv);
+            return oDiv;
+        }
+
+        var getSingle = function (func) {
+            var result;
+            return function() {
+                if(!result) {
+                    result = func.apply(this, arguments);
+                }
+                return result;
+                // if(result != null) {
+                //     return result;
+                // }
+                // result = func.apply(this, arguments);
+                // return result;
+            }
+        }
+
+        var singleAlert = getSingle(CreateAlert);
+
+        oBtn.onclick = function () {
+            var oDiv = new singleAlert('hello yijia');
+            oDiv.style.display = 'block';
+        }
+
+        var Test = (function() {
+            var instance;
+            return function(name) {
+                if(typeof instance === 'object') {
+                    return instance;
+                }
+                instance = this;
+                this.name = name;
+                // return this;
+            }
+        })();
+        var a = new Test('one');
+        Test.prototype.lastName = "C";
+        var b = new Test();
+        var c = new Test();
+
+        console.log(b.lastName === a.lastName);
+    </script>
+</body>
+</html>
