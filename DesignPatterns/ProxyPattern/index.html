@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="demo">
+        <img src="" alt="">
+    </div>
+    <button id="btn">click</button>
+    <script>
+        // 1. 预加载
+
+        // 首先在计算机性能较好的的时候，先发送一次。
+
+        // 2. 懒加载 => 监控真正要展示的内容是否被加载成功
+
+        // 提高用户体验的同时，减少对性能的伤害
+        function MyImage(_id) {
+            var oImg = document.createElement('img');
+            this.setSrc = function (_src) {
+                oImg.src = _src;
+            }
+            document.getElementById(_id).appendChild(oImg);
+        }
+        // new MyImage('demo').setSrc('https://pic4.zhimg.com/v2-f7e5e75bb391e9c74762d9dbee97f807_1200x500.jpg')
+
+        var ProxyImage = (function (src) {
+            var oImg = new Image();
+            var oMyImage = new MyImage('demo');
+            oImg.onload = function () {
+                oMyImage.setSrc(oImg.src);
+            }
+            return function (occupySrc, src) {
+                oImg.src = src;
+                oMyImage.setSrc(occupySrc);
+            }
+        })();
+
+        ProxyImage('../mayun.jpg', 'https://pic4.zhimg.com/v2-f7e5e75bb391e9c74762d9dbee97f807_1200x500.jpg');
+    </script>
+</body>
+
+</html>

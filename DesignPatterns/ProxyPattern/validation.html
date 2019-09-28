@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div>
+        UserName: <input type="text" id="userDom" name="username">
+        <span id="showUser"></span>
+        Password: <input type="password" name="code" id="psDom">
+        <span id="showCode"></span>
+        Email: <input type="text" name="email" id="emDom">
+        <span id="showEm"></span>
+        <button id="submit">Submit</button>
+    </div>
+
+    <script>
+        //  代理模式 + 策略模式
+        function Request() {
+
+        }
+
+        // 构造函数 => 对象实例
+        function Validator() {
+            this.cache = [];
+            this.warnDom = [];
+        }
+
+        Validator.prototype.strategies = {
+            isNoEmpty: function (value, errorMsg) {
+                if (value == '') {
+                    return errorMsg;
+                }
+                return true;
+            },
+            maxLength: function (value, length, errorMsg) {
+                if (value != '' && value.length > length) {
+                    return errorMsg;
+                }
+                return true;
+            },
+            minLength: function (value, length, errorMsg) {
+                if(value != '' && value.length < length) {
+                    return errorMsg;
+                }
+                return true;
+            }   
+        }
+
+        Validator.prototype.add = function (dom, showDom, strategyArr) {
+            var self = this;
+            this.warnDom.push(showDom);
+            strategyArr.forEach(function(ele, index){
+                self.cache.push(function() {
+                    // arr => ['isNonEmpty'] ['maxLength, '4']
+                    var arr = ele.strategy.split(':');
+                    var type = arr.shift();
+
+                    arr.unshift(dom.value);
+                    arr.push(ele.errorMsg)
+
+                    var msg = self.strategies[type].apply(self, arr);
+
+                    if(msg != true) {
+                        showDom.innerText = msg;
+                    }
+
+                    return msg;
+                })
+            })
+        }
+
+        Validator.prototype.start = function () {
+            var flag = true;
+            this.warnDom.forEach(function(ele) {
+                ele.innerText = '';
+            })
+            this.cache.forEach(function(ele) {
+                if(ele() !== true) {
+                    flag = false;
+                }
+            })
+            return flag;
+        }
+
+        Validator.prototype.extend = function (config) {
+            for(var prop in config) {
+                Validator.prototype.strategies[prop] = config[prop];
+            }
+        }
+
+        // add 添加校验规则（dom, [{strategy: }, {}])
+        // start
+        // extend
+        var validator = new Validator();
+
+        validator.extend({
+            isEmail: function (value, errorMsg) {
+                if(value !== '' && value.indexOf('@') == -1) {
+                    return errorMsg
+                }
+                return true;
+            },
+            isPhone: function (value, erroeMsg) {
+                if(value !== '' && value.length !== 11) {
+                    return erroeMsg;
+                }
+                return true;
+            }
+        })
+
+        var ProxyRequest = (function () {
+            validator.add(userDom, showUser, [{
+                    strategy: 'isNonEmpty',
+                    msg: '用户名不能为空',
+                },
+                {
+                    strategy: 'maxLength:4',
+                    msg: '用户名长度不能大于4'
+                },
+            ]);
+            validator.add(psDom, showCode, [{
+                    strategy: 'isNonEmpty',
+                    msg: '密码不能为空',
+                },
+                {
+                    strategy: 'minLength:6',
+                    msg: '密码长度不能小于6'
+                },
+            ]);
+            validator.add(emDom, showEm, [{
+                    strategy: 'isNonEmpty',
+                    msg: '邮箱不能为空',
+                },
+                {
+                    strategy: 'isEmail',
+                    msg: '邮箱格式不正确',
+                },
+            ]);
+            return function () {
+                if (Validitor.start() == true) {
+                    Request();
+                }
+            }
+        })();
+    </script>
+</body>
+
+</html>

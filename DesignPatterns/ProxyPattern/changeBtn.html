@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #show {
+            height: 100px;
+            width: 100px;
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+    <div id="show">duyi</div>
+    <button type='bg'>add greenBg</button>
+    <button type='cl'>add blueColor</button>
+    <button type='fs'>add fontSize</button>
+    <button type='fw'>add fontWeight</button>
+    <button type='op'>add opacity</button>
+
+    <script>
+        var oDiv = document.getElementById('show');
+        var oButtonArray = document.getElementsByTagName('button');
+
+        var ProxyRequest = function (func) {
+            let cache = [];
+            let timer;
+            return function () {
+                cache.push(this.getAttribute('type'));
+                clearTimeout(timer);
+                timer = setTimeout(() => {
+                    func(oDiv, cache);
+                    cache = [];
+                }, 2000)
+            }
+        }
+
+        let realChangeStyle = ProxyRequest(changeStyle);
+
+        for(let i = 0; i < oButtonArray.length; i++) {
+            oButtonArray[i].onclick = realChangeStyle;
+        }
+
+        function changeStyle(dom, typeArr) {
+            const typeObj = {
+                bg: ['backgroundColor', 'green'],
+                cl: ['color', 'blue'],
+                fs: ['fontSize', '24px'],
+                fw: ['fontWeight', 'bold'],
+                op: ['opacity', '0.3']
+            }
+            if(typeArr.constructor === Array) {
+                typeArr.forEach(ele => dom.style[typeObj[ele][0]] = typeObj[ele][1])
+            } else {
+                dom.style[typeObj[type][0]] = typeObj[type][1];
+            }
+        }
+
+
+        // changeStyle(['bg', 'op', 'fw'])
+    </script>
+</body>
+</html>
